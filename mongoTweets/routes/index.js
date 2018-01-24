@@ -19,6 +19,9 @@ var t = require('../models/TweetModel');
 
 console.log('************ index.js'); console.log( "t!==undefined=" +  (t!==undefined) );
 
+/**
+ * not working from the point then keylist is returned. Hope to finish by the evening of 24th Jan 2018 
+ */
 router.get( '/', function( req, res, next) { 
     var tweetsArr = [];
     tweetsArr = t.ficturePromise.then(tweetsArr);

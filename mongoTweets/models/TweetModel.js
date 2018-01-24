@@ -1,20 +1,23 @@
 'use strict';
 
+/**
+ * THIS FILE HAS TO BE REFACTORED
+ * adding tweets from /comp/quatesO to mongodb is working
+ * not finished yet reading all tweets ids from mongodb  in order to obtain tweets ids array, in order to iterate over it and fetch tweet
+ */
+
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise
 
 var Schema = mongoose.Schema;
 var Promise = require('es6-promise').Promise;
 
-//import Movie from '../models/movie'; // react
-//var UserModel = require( '../models/UserModel' ); //Epress  User = require("./user.js")
 var UserModel = require('./UserModel') ;
-//console.log( UserModel ); 
 var User_mentionsModel = require('./User_mentionsModel') ;
 var UrlsModel = require('./UrlsModel') ;
-console.log( 'UserModel!==undefined=' +  (UserModel!==undefined)  ); 
-console.log( 'User_mentionsModel!==undefined=' +  (User_mentionsModel!==undefined)  ); 
-console.log( 'UrlsModel!==undefined=' +  (UrlsModel!==undefined)  ); 
+//console.log( 'UserModel!==undefined=' +  (UserModel!==undefined)  ); 
+//console.log( 'User_mentionsModel!==undefined=' +  (User_mentionsModel!==undefined)  ); 
+//console.log( 'UrlsModel!==undefined=' +  (UrlsModel!==undefined)  ); 
 
 const tweetSchema = new mongoose.Schema({
     text: { type: String, unique: false },
@@ -32,25 +35,15 @@ exports.TweetModel = TweetModel;
 var qArr = require('../comp/quatesO'); //quatesArr with tweet body and author name 
 // console.log(qArr.q[0]);  
 
-// generateTweetPromise 
-//seems it is enough save method on the model in order to write to database 
+// generateTweetPromise  
 var tweetsArr = [];
-//error, can not set property fixt of undefined //tweetSchema.prototype.fixt = function gTP() { 
-    
-// exports.fixture = function () { return new Promise( function(tweetsArr, reject) 
-//exports.fict = gTP.then( function (tweetsArr){} )
-//        .catch( function (error) { console.log(error.message); } )  
-//gives warning that mongoose promise is deprecated 
 exports.ficturePromise = new Promise( function( resolve, reject) {
 
-        //console.log( ' from exports.ficturePromise = new Promise C:\Bitnami\wampstack-7.0.23-0\apache2\htdocs\cood180119\projExpress1\mongoTweets\models\TweetModel.js ')
+
         var locs = [ 'UK', 'FR', 'SE', 'GE', 'IT', 'SP', 'NL' ]; 
-        //var tweetsArr = [];  //passed to be resolved 
-        //var users = []; var user_mentions = []; var urls = {}; 
         var user, um, name, screen_name, start, end, ur, rd, txt; 
         var ObjectID = require('mongodb').ObjectID;
         
-        //cnt = 0; 
         //console.log( 'qArr.q.length=' +  qArr.q.length  ); 
         for ( let qi of qArr.q ) {
             //console.log( 'qi=' ); console.log(qi);
@@ -71,10 +64,7 @@ exports.ficturePromise = new Promise( function( resolve, reject) {
               // saved!
             }); 
             //console.log( 'user._id=' +  user._id ); 
-            
-            
-            //users.push(user); 
-            //console.log( 'C:\Bitnami\wampstack-7.0.23-0\apache2\htdocs\cood180119\projExpress1\mongoTweets\controllers\Tweet.js,  user.screen_name = ' ); console.log( user.screen_name ); 
+
 
             //user_mentions
             var um = new User_mentionsModel({  
@@ -148,11 +138,7 @@ var mongoConnPromise = new Promise( function(resolve, reject) {
     }); // MongoClient.connect(connectionUrl, function (err, client)      
     
 });
-
-//exports.keylist = function() { 
-//var items = []; 
-//exports.keylist = new Promise( function(resolve, reject) { 
-    
+  
 exports.keylist = new Promise( function(resolve, reject) { 
     
     //items = function(req, res, next) {
@@ -178,51 +164,9 @@ exports.keylist = new Promise( function(resolve, reject) {
 
     resolve([]);
 }); // exports.keylist =new Promise( function(resolve, reject) { 
-         
-         /*
-exports.keylistOLD = mongoConnPromise.then( function(db) { 
+     
 
-        return new Promise( (result, reject) => {
-            console.log(' exports.keylist,   from C:\Bitnami\wampstack-7.0.23-0\apache2\htdocs\cood180119\projExpress1\mongoTweets\models\TweetModel.js, exports.keylist  ');
-            
-            //find() method returns the cursor 
-            //The toArray() method returns an array that contains all the documents from a cursor. The method iterates completely the cursor, loading all the documents into RAM and exhausting the cursor.
-            //console.log( ' db.collection(mongodb) !== null ' + (db.collection('mongodb') !== null) )
-            //console.log( ' db.collection(mongodb).find() !== null ' + (db.collection('mongodb').find({}) !== null) )
-            //var query = db.collection('mongodb').find({}); //.select('_id');//.toArray();
-            var query = TweetModel.find({}).select('_id');
-            //resolve = res
-            items = query.exec( function (err, someValue) {
-                if(err) { console.log('ERROR from C:\Bitnami\wampstack-7.0.23-0\apache2\htdocs\cood180119\projExpress1\mongoTweets\models\TweetModel.js' + err.message ); }
-                //if (err) return next(err);
-                //resolve.send(someValue);
-            });
-            console.log('items');  console.log(items);
-            resolve(items);
-        }); // mongoConnPromise().then( function(db) 
-    
-    }); // exports.keylist = new Promise( function(resolve, reject) 
-    //console.log('items before return ');  console.log(items);
-    //resolve(items); 
-//});  // exports.keylist = new Promise( function(resolve, reject) 
-                    //.toArray( function(err, items) {
-              //  if(err) { console.log('ERROR from C:\Bitnami\wampstack-7.0.23-0\apache2\htdocs\cood180119\projExpress1\mongoTweets\models\TweetModel.js' + err.message ); 
-                    //reject(err); 
-               // }
-               // return items; 
-                //callback(err, posts);
-            });
-            //var items = TweetModel.find(); //function (err) {
-              //if (err) return handleError(err);
-                //console.log(items);
-                //return items; 
-            //})
 
-// ) // exports.keylist = function() 
-
-*/
-
-//does not work on const, 
 exports.readId = function(id) {
     
     return new Promise( (resolve, reject) => {
@@ -231,13 +175,5 @@ exports.readId = function(id) {
     }); 
     
 }; //exports.readId = function(id) 
-
-
-
-
-
-//var MongoClient = require('mongodb').MongoClient;
-//var connectionUrl = 'mongodb://localhost:27017/myproject';// smCol = 'tweetsIT';
-
 
 
