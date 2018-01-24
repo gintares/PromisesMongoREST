@@ -1,15 +1,6 @@
 var qArr = require( './quatesO' ); //quatesArr with tweet body and author name 
 console.log( qArr.q[0] ); 
 
-//REQUIRES
-//CONNECTION TO THE PORT  !!!!
-//SET
-//USE 
-// works correct :  console.log('DB='); console.log(db);  
-//$users = [ "id"=>, 'name'=>, 'screen_name'=>, 'location'=>, 'description'=>, 'url'=> ];  
-//$tweets = [ "id"=>,  "text"=>, "createdOn"=>, "user"=>[], "user_mentions"=>, "urls"=> ];
-//$user_mentions = [  "screen_name", name", "id" ]
-//$urls =  [ "url", "expanded_url", "display_url" ] 
 
 var locs = [ 'UK', 'FR', 'SE', 'GE', 'IT', 'SP', 'NL' ]; 
 var tweets = []; var users = []; var user_mentions = []; var urls = {}; 
@@ -105,36 +96,3 @@ exports.readName = function(key) {
 
 exports.t = tweets; //logs, to access by index use assgnName.t[i]
 exports.tm = tweetsMap; //logs, to access by index use assgnName.t[i]
-/*
- 
-var db = require('./lib/db');
-var MongoClient = require('mongodb').MongoClient;
-// Server = require('mongodb').Server;
-// var mongoClient = new MongoClient(new Server('localhost', 27017));
-// mongoClient.open(function(err, mongoClient) { var db1 = mongoClient.db("mydb"); mongoClient.close(); });
-
-var connectionUrl = 'mongodb://localhost:27017/myproject', smCol = 'tweetsIT';
- 
-//v2 of Mongo MongoClient.connect ( connectionUrl, function(err, db) {   
-MongoClient.connect ( connectionUrl, function(err, client) {       
-    
-    console.log("Connected correctly to server");  
-    // Get some collection 
-    // you will get error related to MongoDB v2 versus v3, that collections isn ot an argument // var collection = db.collection(smCol);  //  https://stackoverflow.com/questions/47662220/db-collection-is-not-a-function-when-using-mongoclient-v3-0/47662979#47662979
-    if (err) throw err;
-    var db = client.db('mytestingdb');
-    
-    db.collection('mongodb').insert( tweets , function(error,result) {    
-        //here result will contain an array of records inserted 
-        if(!error) { 
-            console.log("Success :"+result.ops.length+" chapters inserted!"); 
-        } else { 
-            console.log("Some error was encountered!"); 
-        }    
-        //MongoDB v2 db.close();   
-        client.close(); 
-    });   
-  
-} );
-
-*/

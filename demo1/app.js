@@ -53,31 +53,5 @@ app.use( function(err, req, res, next) {
   res.render('error');
 });
 
-
-
-
-/* node way
-var http = require('http'); 
- * 
-//var server = http.createServer();
-//server.on('request',  (req, res) => {
-//
-//http.createServer(function (req, res) 
-http.createServer((req, res) => {
-  res.writeHead( 200, {'Content-Type': 'text/plain'} );
-  res.end('Hello, World!\n');
-}).listen(8124, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:8124\n\
-*/
-/* Express way : 
-app.get('/', function(req, res, next) {
-    res.render('index', );
-});
-*/
-// to run use $ node appHello.js
-//visit browser   http://127.0.0.1:8124  
- 
-//module.exports = app;   
-//app.listen( process.env.PORT, () => console.log( 'Example app listening on port ' + process.env.PORT ) );   
-
 app.listen( 3000, () => console.log('Example app listening on port 3000!'))
+
