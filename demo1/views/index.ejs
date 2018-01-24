@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include head1 %>
+</head>
+<body>
+<% include header2 %>
+<% if (tweetlist.length > 0) { %>
+<ul><%
+for (var tweet of tweetlist) {
+  %><li><%= tweet.key %>:
+  <a href="/tweets/view?key=<%= tweet.key %>"><%= tweet.text %></a>
+  </li><%
+}
+%></ul>
+<% } %>
+<% include footer %>
+</body>
+</html>
